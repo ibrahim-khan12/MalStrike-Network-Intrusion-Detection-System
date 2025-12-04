@@ -1,4 +1,4 @@
-# MalStrike: Network Intrusion Detection System
+# Network Intrusion Detection System
 
 A comprehensive machine learning-based Network Intrusion Detection System (NIDS) implementing multiple classification approaches for detecting malicious network traffic and cyber attacks.
 
