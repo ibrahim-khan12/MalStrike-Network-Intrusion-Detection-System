@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Morphological ELM Malware Detector</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dark">
+  <header>
+    <div class="title">
+      <div class="logo">SK</div>
+      <div>
+        <h1>Morphological ELM Malware Detector</h1>
+        <p class="subtitle">Browser-based inference </p>
+      </div>
+    </div>
+
+    <div class="toggle-container">
+      <span>🌙</span>
+      <label class="switch">
+        <input type="checkbox" id="themeToggle">
+        <span class="slider round"></span>
+      </label>
+      <span>☀️</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Manual feature input -->
+    <section class="card">
+      <h2>🔢 Manual Feature Vector</h2>
+      <p class="hint">
+        Paste a single row of features (comma or space separated), using the same
+        order as during training (all columns except <code>Label</code>).
+      </p>
+      <textarea id="featureInput" placeholder="e.g. 123.0,0,1,0,5,3,42,0,10,7,2"></textarea>
+
+      <button id="predictBtn" disabled>🔍 Predict</button>
+      <div class="status" id="status">Loading model...</div>
+    </section>
+
+    <!-- CSV uploader & auto-column helper -->
+    <section class="card">
+      <h2>📄 CSV Uploader & Auto-Columns</h2>
+      <p class="hint">
+        Upload a CSV with the same schema as your training file
+        (<code>Label, FileSizeKB, PackerUsed, ...</code>).
+        The app will detect the header, treat the label column as non-feature,
+        and let you choose any row for prediction.
+      </p>
+
+      <div class="csv-controls">
+        <input type="file" id="csvFile" accept=".csv" />
+        <label>
+          Label column name:
+          <input type="text" id="labelCol" value="Label" />
+        </label>
+      </div>
+
+      <div id="csvInfo" class="csv-info"></div>
+
+      <div class="row-picker" id="rowPicker" style="display:none;">
+        <label>
+          Select row:
+          <select id="rowSelect"></select>
+        </label>
+        <button id="loadRowBtn">Use row as input</button>
+      </div>
+    </section>
+
+    <!-- Result card -->
+    <section class="card result" id="resultCard" style="display:none;">
+      <h2>🧠 Prediction Result</h2>
+      <div id="predictionLabel" class="prediction-label"></div>
+
+      <div class="probability-section">
+        <h3>Class Probabilities</h3>
+        <div id="probBars"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
